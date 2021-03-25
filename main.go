@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"reflect"
 	"strings"
 	"time"
 
@@ -39,6 +40,9 @@ func (c *LockCommand) Run(args []string) int {
 		c.Ui.Error(fmt.Sprintf("Error locking source state: %s", err))
 		return 1
 	}
+
+	lockID := reflect.ValueOf(stateLocker).Elem().FieldByName("lockID")
+	fmt.Println(lockID)
 
 	return 0
 }
